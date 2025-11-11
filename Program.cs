@@ -1,4 +1,5 @@
 
+using GameStore.Api.Data;
 using GameStore.Api.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,10 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 //connection string
 var connString = builder.Configuration.GetConnectionString("GameStor");
 //register DbContext with DI container
-builder.Services.AddSqlite<GameStore.Api.Data.GameStoreContext>(connString);
+builder.Services.AddSqlite<GameStoreContext>(connString);
 
 var app = builder.Build();
 
+
 app.MapGamesEndpoints();
+
+app.MigrateDb();
 
 app.Run();
