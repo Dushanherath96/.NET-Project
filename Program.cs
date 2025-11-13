@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 //connection string
 var connString = builder.Configuration.GetConnectionString("GameStor");
 //register DbContext with DI container
+//GameStoreContext will be configured to use SQLite with the provided connection string
 builder.Services.AddSqlite<GameStoreContext>(connString);
 
 var app = builder.Build();
